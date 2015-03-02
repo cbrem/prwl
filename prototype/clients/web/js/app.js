@@ -4,11 +4,16 @@ TODO:
 	doesn't need to work in the prototype
 * add navbar to top
 * hook up ember data
+	* need to get ember-data library
 	* use this.store.find to get data
 	* use this.store.createRecord to add something
 	* use record.delete followed by record.save to remove it
 	* use record.save to update it
+* replace big debug builds with min ones
 */
+
+
+/* HELPERS */
 
 // Sends location and time info to a callback.
 var getLoc = function(cb) {
@@ -26,6 +31,11 @@ var getLoc = function(cb) {
     });
 };
 
+// Gets a timestamp.
+var getTimestamp = function() {
+	return new Date().getTime();
+};
+
 // Gets formatted date from numerical date string.
 var formatDate = function(dateStr) {
 	return new Date(dateStr).toLocaleDateString();
@@ -33,8 +43,8 @@ var formatDate = function(dateStr) {
 
 // Create a marker and attach a listener.
 var makeMarker = function(pin, map) {
-	var latLng = new google.maps.LatLng(pin.latitude, pin.longitude);
-	var title = formatDate(pin.timestamp) + ": " + pin.description.substring(0, 10) + "...";
+	var latLng = new google.maps.LatLng(pin.get('latitude'), pin.get('longitude'));
+	var title = formatDate(pin.get('timestamp')) + ": " + pin.get('description').substring(0, 10) + "...";
 	var marker = new google.maps.Marker({
 	    position: latLng,
 	    map: map,
@@ -43,70 +53,25 @@ var makeMarker = function(pin, map) {
 	google.maps.event.addListener(marker, 'click', () => alert(title));
 };
 
-/*
-TODO: set up fixture data
-DS.Model.extend({
-    title: DS.attr('string'),
-    isCompleted: DS.attr('boolean')
-}).reopenClass({
-    FIXTURES: [
-		{
-			timestamp: 1424819107056,
-			latitude: 40.44,
-			longitude: -79.93,
-		},
-		{
-			timestamp: 1424819117056,
-			latitude: 40.44,
-			longitude: -79.93,
-		},
-		{
-			timestamp: 1424819471768,
-			latitude: 40.44,
-			longitude: -79.92,
-			description: 'This really sucked'
-		},
-		{
-			timestamp: 1424819481768,
-			latitude: 40.44,
-			longitude: -79.91,
-			description: 'That really sucked'
-		},
-    ]
-});
-*/
+// Is a pin complete?
+var complete = function(pin) {
+	return !!(pin.get('description') && pin.get('latitude') && pin.get('longitude') && pin.get('timestamp'));
+};
 
-var defaultMyPins = [
-	{
-		timestamp: 1424819107056,
-		latitude: 40.44,
-		longitude: -79.93,
-	},
-	{
-		timestamp: 1424819117056,
-		latitude: 40.44,
-		longitude: -79.93,
-	},
-	{
-		timestamp: 1424819471768,
-		latitude: 40.44,
-		longitude: -79.92,
-		description: 'This really sucked'
-	},
-	{
-		timestamp: 1424819481768,
-		latitude: 40.44,
-		longitude: -79.91,
-		description: 'That really sucked'
-	},
-];
+// Is it incomplete?
+var incomplete = function(pin) {
+	return !complete(pin);
+};
 
-App = Ember.Application.create();
 
+
+/* ROUTER */
+
+var App = Ember.Application.create();
+App.ApplicationAdapter = DS.FixtureAdapter;
 App.Router.map(function() {
-	// TODO
-	// Info and donation button.
-	// this.route('about');
+	// Get info and donate.
+	this.route('about');
 
 	// Drop a pin.
   	this.route('drop', {path: '/'});
@@ -119,34 +84,87 @@ App.Router.map(function() {
   	this.route('map');
 });
 
+
+/* MODELS */
+
+App.Pin = DS.Model.extend({
+	timestamp: DS.attr('date'),
+	latitude: DS.attr('number'),
+	longitude: DS.attr('number'),
+	description: DS.attr('string'),
+});
+App.Pin.reopenClass({
+	FIXTURES: [
+		{
+			id: 1,
+			timestamp: 1424819107056,
+			latitude: 40.44,
+			longitude: -79.93,
+		},
+		{
+			id: 2,
+			timestamp: 1424819117056,
+			latitude: 40.44,
+			longitude: -79.93,
+		},
+		{
+			id: 3,
+			timestamp: 1424819471768,
+			latitude: 40.44,
+			longitude: -79.92,
+			description: 'This really sucked'
+		},
+		{
+			id: 4,
+			timestamp: 1424819481768,
+			latitude: 40.44,
+			longitude: -79.91,
+			description: 'That really sucked'
+		},
+	],
+});
+
+
+/*  ROUTES */
 App.MyPinsRoute = Ember.Route.extend({
   	model: function() {
-  		// TODO: real data source
-    	return defaultMyPins.filter(pin => !pin.description);
+  		return this.store.find('pin');
   	}
 });
 
 App.MapRoute = Ember.Route.extend({
 	model: function() {
-		// TODO: real data source
-		return defaultMyPins.filter(pin => pin.description);
-	}
+		return this.store.find('pin');
+	},
 });
+
+
+/* CONTROLLERS */
 
 App.DropController = Ember.ObjectController.extend({
 	actions: {
 		dropPin: function() {
 			getLoc(loc => {
-				if (loc) alert('Pin dropped!');
-	        	// TODO: which model do we add pin into here?
-	        	// NOTE: this should probably go *right* to the server
+				var pin;
+				if (loc) {
+					pin = this.store.createRecord('pin', loc);
+				} else {
+					// If location data wasn't available, fall back to just
+					// taking the timestamp.
+					var timestamp = getTimestamp();
+					pin = this.store.createRecord('pin', {
+						timestamp: timestamp
+					});
+				}
+				pin.save();
 	        });
+
+	        // TODO: necessary?
+	        return false;
 		},
 	},
 });
 
-// TODO: when we get elements to show in the MyPins view, only show those
-// that have no description
 App.MyPinsController = Ember.ArrayController.extend({
 	itemController: 'myPin',
 });
@@ -157,7 +175,6 @@ App.MyPinController = Ember.ObjectController.extend({
 			this.set('descriptionIsOpen', !this.get('descriptionIsOpen'));
 		},
 		saveDescription: function() {
-			console.log("Saving", this.get('description'));
 			this.set('descriptionIsOpen', false);
 			this.get('model').save();
 		},
@@ -168,7 +185,8 @@ App.MyPinController = Ember.ObjectController.extend({
 
 App.MapController = Ember.ObjectController.extend({
 	init: function() {
-		getLoc(({latitude, longitude}) => {
+		this._super();
+		getLoc(function({latitude, longitude}) {
 			// Create a new map centered on the user.
 			var opt = {
 	          center: new google.maps.LatLng(latitude, longitude),
@@ -177,12 +195,18 @@ App.MapController = Ember.ObjectController.extend({
 	        var map = new google.maps.Map(document.getElementById('map-canvas'), opt);
 
 	        // Fill with all pins.
-	        for (var pin of this.get('model')) {
-	        	makeMarker(pin, map);
+	        var pins = this.get('model').get('content');
+	        for (var pin of pins) {
+	        	if (complete(pin)) {
+	        		makeMarker(pin, map);
+	        	}
 	        }
-		});
+		}.bind(this));
 	},
 });
+
+
+/* HELPERS */
 
 Ember.Handlebars.helper('format-date', function(date) {
   return date.toLocaleString();
