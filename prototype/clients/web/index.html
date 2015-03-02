@@ -37,10 +37,10 @@
   <script type="text/x-handlebars" id="myPins">
     <h3>You have {{length}} dropped pins.</h3>
     <ul>
-    {{#each pin in model}}
+    {{#each pin in model itemController="myPin"}}
       <li>
         <div {{action "toggleDescription"}}>
-          <h4>Pin dropped on {{format-date pin.timestamp}}</h4>
+          <h4>Pin dropped on {{pin.timestamp}}</h4>
           <p>({{pin.latitude}}, {{pin.longitude}})</p>
         </div>
         {{#if pin.descriptionIsOpen}}

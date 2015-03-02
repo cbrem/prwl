@@ -88,7 +88,7 @@ App.Router.map(function() {
 /* MODELS */
 
 App.Pin = DS.Model.extend({
-	timestamp: DS.attr('date'),
+	timestamp: DS.attr('number'),
 	latitude: DS.attr('number'),
 	longitude: DS.attr('number'),
 	description: DS.attr('string'),
@@ -136,6 +136,25 @@ App.MapRoute = Ember.Route.extend({
 	model: function() {
 		return this.store.find('pin');
 	},
+	setupController: function(controller, model) {
+		this._super(controller, model);
+		var pins = model.get('content');
+		getLoc(function({latitude, longitude}) {
+			// Create a new map centered on the user.
+			var opt = {
+	          center: new google.maps.LatLng(latitude, longitude),
+	          zoom: 8
+	        };
+	        var map = new google.maps.Map(document.getElementById('map-canvas'), opt);
+
+	        // Fill with all pins.
+	        for (var pin of pins) {
+	        	if (complete(pin)) {
+	        		makeMarker(pin, map);
+	        	}
+	        }
+		});
+	},
 });
 
 
@@ -165,14 +184,11 @@ App.DropController = Ember.ObjectController.extend({
 	},
 });
 
-App.MyPinsController = Ember.ArrayController.extend({
-	itemController: 'myPin',
-});
-
 App.MyPinController = Ember.ObjectController.extend({
 	actions: {
 		toggleDescription: function() {
 			this.set('descriptionIsOpen', !this.get('descriptionIsOpen'));
+			return false;
 		},
 		saveDescription: function() {
 			this.set('descriptionIsOpen', false);
@@ -181,33 +197,4 @@ App.MyPinController = Ember.ObjectController.extend({
 	},
 
 	descriptionIsOpen: false,
-});
-
-App.MapController = Ember.ObjectController.extend({
-	init: function() {
-		this._super();
-		getLoc(function({latitude, longitude}) {
-			// Create a new map centered on the user.
-			var opt = {
-	          center: new google.maps.LatLng(latitude, longitude),
-	          zoom: 8
-	        };
-	        var map = new google.maps.Map(document.getElementById('map-canvas'), opt);
-
-	        // Fill with all pins.
-	        var pins = this.get('model').get('content');
-	        for (var pin of pins) {
-	        	if (complete(pin)) {
-	        		makeMarker(pin, map);
-	        	}
-	        }
-		}.bind(this));
-	},
-});
-
-
-/* HELPERS */
-
-Ember.Handlebars.helper('format-date', function(date) {
-  return date.toLocaleString();
 });
