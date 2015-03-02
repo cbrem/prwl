@@ -10,6 +10,9 @@ TODO:
 	* use record.delete followed by record.save to remove it
 	* use record.save to update it
 * replace big debug builds with min ones
+
+CURRENT:
+* Some funky stuff going on with creating extra model instances
 */
 
 
@@ -68,7 +71,7 @@ var incomplete = function(pin) {
 /* ROUTER */
 
 var App = Ember.Application.create();
-App.ApplicationAdapter = DS.FixtureAdapter;
+//App.ApplicationAdapter = DS.FixtureAdapter;
 App.Router.map(function() {
 	// Get info and donate.
 	this.route('about');
@@ -92,36 +95,6 @@ App.Pin = DS.Model.extend({
 	latitude: DS.attr('number'),
 	longitude: DS.attr('number'),
 	description: DS.attr('string'),
-});
-App.Pin.reopenClass({
-	FIXTURES: [
-		{
-			id: 1,
-			timestamp: 1424819107056,
-			latitude: 40.44,
-			longitude: -79.93,
-		},
-		{
-			id: 2,
-			timestamp: 1424819117056,
-			latitude: 40.44,
-			longitude: -79.93,
-		},
-		{
-			id: 3,
-			timestamp: 1424819471768,
-			latitude: 40.44,
-			longitude: -79.92,
-			description: 'This really sucked'
-		},
-		{
-			id: 4,
-			timestamp: 1424819481768,
-			latitude: 40.44,
-			longitude: -79.91,
-			description: 'That really sucked'
-		},
-	],
 });
 
 
