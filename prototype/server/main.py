@@ -4,6 +4,7 @@ TODO:
 * currently, the server is giving out ids. Can bottle do ids on the client? Should it?
 """
 
+import os
 import bottle
 
 idCounter = 1
@@ -31,4 +32,4 @@ def post():
 def static(filepath):
     return bottle.static_file(filepath, root='../clients/web')
 
-bottle.run(host='localhost', port=8080)
+bottle.run(host='localhost', port=int(os.environ.get("PORT", 5000)))
