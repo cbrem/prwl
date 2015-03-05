@@ -32,4 +32,4 @@ def post():
 def static(filepath):
     return bottle.static_file(filepath, root='../clients/web')
 
-bottle.run(host='localhost', port=int(os.environ.get("PORT", 5000)))
+bottle.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
