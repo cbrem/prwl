@@ -1,0 +1,1 @@
+web: python prototype/server/main.py
