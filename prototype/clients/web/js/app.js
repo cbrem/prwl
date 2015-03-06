@@ -53,7 +53,7 @@ var makeMarker = function(pin, map) {
 	    title: title,
 	});
 	google.maps.event.addListener(marker, 'click', function() {
-		alert(title));
+		alert(title);
 	});
 };
 
