@@ -2,7 +2,6 @@
 TODO:
 * how to handle users/authentication? can probably worry about this later,
 	doesn't need to work in the prototype
-* add navbar to top
 * hook up ember data
 	* need to get ember-data library
 	* use this.store.find to get data
@@ -25,7 +24,7 @@ var getLoc = function(cb) {
 		return;
 	}
 
-	navigator.geolocation.getCurrentPosition(pos => {
+	navigator.geolocation.getCurrentPosition(function(pos) {
     	cb({
     		timestamp: pos.timestamp,
     		latitude: pos.coords.latitude,
@@ -53,7 +52,9 @@ var makeMarker = function(pin, map) {
 	    map: map,
 	    title: title,
 	});
-	google.maps.event.addListener(marker, 'click', () => alert(title));
+	google.maps.event.addListener(marker, 'click', function() {
+		alert(title));
+	});
 };
 
 // Is a pin complete?
@@ -136,7 +137,7 @@ App.MapRoute = Ember.Route.extend({
 App.DropController = Ember.ObjectController.extend({
 	actions: {
 		dropPin: function() {
-			getLoc(loc => {
+			getLoc(function(loc) {
 				var pin;
 				if (loc) {
 					pin = this.store.createRecord('pin', loc);
@@ -149,7 +150,7 @@ App.DropController = Ember.ObjectController.extend({
 					});
 				}
 				pin.save();
-	        });
+	        }.bind(this));
 
 	        // TODO: necessary?
 	        return false;
