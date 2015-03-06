@@ -33,7 +33,7 @@ def post():
 
 @bottle.route('/')
 def foo():
-	return <h1>prowlit.org coming soon!</h1>
+	return "<h1>prowlit.org coming soon!</h1>"
     #return bottle.static_file('index.html', root=STATIC_ROOT)
 
 @bottle.route('/<filepath:path>')
