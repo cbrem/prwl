@@ -113,10 +113,10 @@ App.MapRoute = Ember.Route.extend({
 	setupController: function(controller, model) {
 		this._super(controller, model);
 		var pins = model.get('content');
-		getLoc(function({latitude, longitude}) {
+		getLoc(function(loc) {
 			// Create a new map centered on the user.
 			var opt = {
-	          center: new google.maps.LatLng(latitude, longitude),
+	          center: new google.maps.LatLng(loc.latitude, loc.longitude),
 	          zoom: 8
 	        };
 	        var map = new google.maps.Map(document.getElementById('map-canvas'), opt);
