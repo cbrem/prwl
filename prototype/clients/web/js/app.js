@@ -11,7 +11,9 @@ TODO:
 * replace big debug builds with min ones
 
 CURRENT:
-* Some funky stuff going on with creating extra model instances
+* When we flip back and forth between two seperate windows, something breaks.
+	* pins in mypins *do* persist
+	* but it seems like descriptions are not persisting. because things don't stay in the map view
 */
 
 
@@ -85,7 +87,7 @@ App.Router.map(function() {
 
 
   	// Looks at a map of everybody's pins.
-  	this.route('map');
+  	this.route('harassmap');
 });
 
 
@@ -106,7 +108,7 @@ App.MyPinsRoute = Ember.Route.extend({
   	}
 });
 
-App.MapRoute = Ember.Route.extend({
+App.HarassmapRoute = Ember.Route.extend({
 	model: function() {
 		return this.store.find('pin');
 	},
@@ -139,14 +141,21 @@ App.DropController = Ember.ObjectController.extend({
 		dropPin: function() {
 			getLoc(function(loc) {
 				var pin;
+				// TODO: make timestamps more unique...like timestamp + userid
 				if (loc) {
-					pin = this.store.createRecord('pin', loc);
+					pin = this.store.createRecord('pin', {
+						timestamp: loc.timestamp,
+						id: loc.timestamp,
+						latitude: loc.latitude,
+						longitude: loc.longitude
+					});
 				} else {
 					// If location data wasn't available, fall back to just
 					// taking the timestamp.
 					var timestamp = getTimestamp();
 					pin = this.store.createRecord('pin', {
-						timestamp: timestamp
+						timestamp: timestamp,
+						id: timestamp
 					});
 				}
 				pin.save();
@@ -165,8 +174,12 @@ App.MyPinController = Ember.ObjectController.extend({
 			return false;
 		},
 		saveDescription: function() {
+			// TODO: something wrong here? is this actually saving?
 			this.set('descriptionIsOpen', false);
-			this.get('model').save();
+
+			var model = this.get('model');
+			model.set('description', this.get('description'));
+			model.save();
 		},
 	},
 
