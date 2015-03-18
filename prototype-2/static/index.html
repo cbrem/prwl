@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- TODO: tags for SEO -->
+		<meta charset="utf-8">
+		<title>Prowl</title>
+		<link href="lib/foundation.min.css" rel="stylesheet">
+		<link href="css/main.css" rel="stylesheet">
+
+	</head>
+	<body>
+		<div id="main">
+			<!-- Header -->
+			<div class="row">
+				<div class="small-12 columns">
+					<div class="icon-bar three-up">
+						<a class="item" href="#">
+					    	<img src="img/general-ui/svg/pin60.svg" width="48px">
+					    	<label>Home</label>
+					  	</a>
+					  	<a class="item" href="#about">
+					   		<img src="img/general-ui/svg/question57.svg" width="48px">
+					    	<label>About</label>
+					  	</a>
+					  	<a class="item" href="#store">
+					   		<img src="img/general-ui/svg/cart.svg" width="48px">
+					    	<label>Store</label>
+					  	</a>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="small-3 columns">
+					<img src="img/cat2.jpg">
+				</div>
+				<div class="small-9 columns">
+					<h1>PROWL</h1>
+				</div>
+			</div>
+
+			<!-- Templates attach here -->
+			<div class="row" id="main-anchor"></div>
+
+			<!-- Footer -->
+			<div class="row">
+				<div class="small-12 columns">
+					<!-- TODO: attribution for icons -->
+					<p>Footer</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- Main templates -->
+		<script type="text/template" id="home-template">
+			<div class="small-3 columns">
+				<div class="icon-bar two-up">
+				  	<a class="item">
+				  		<img src="img/general-ui/svg/profile29.svg" width="24px">
+						<label>Mine</label>
+				  	</a>
+				  	<a class="item">
+				  		<img src="img/general-ui/svg/globe32.svg" width="24px">
+				    	<label>All</label>
+				  	</a>
+				</div>
+				<div id="sidebar-anchor"></div>
+			</div>
+			<div class="small-9 columns" id="map"></div>
+		</script>
+		<script type="text/template" id="about-template">
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet erat vel ante aliquam pulvinar. Integer ultrices, libero ullamcorper convallis accumsan, erat mi ultricies libero, a consectetur elit magna a erat. Suspendisse vestibulum consequat nibh. Duis molestie, elit eu condimentum ultricies, magna magna suscipit dui, eget bibendum turpis elit lacinia leo. Donec elementum, nulla sit amet vehicula elementum, diam libero aliquam nunc, sit amet congue eros ligula non sapien. Nulla lobortis sit amet nisi et placerat. Aliquam erat volutpat. Suspendisse ornare pretium mauris a pulvinar. Duis quis euismod felis. Etiam volutpat pretium vestibulum. Aliquam erat volutpat. Mauris laoreet efficitur arcu, ut ornare mi tempor in. Nulla facilisi.</p>
+
+			<p>Aenean at arcu dapibus, eleifend odio at, accumsan eros. Ut vel felis diam. Donec nec risus quis libero scelerisque gravida vel et neque. Sed id purus rutrum, hendrerit dui eu, vestibulum turpis. Ut sit amet orci et elit volutpat vulputate. Donec id massa felis. Donec a faucibus quam. Cras dolor ex, varius sed nibh quis, suscipit porttitor ipsum. Ut eu fringilla odio. Proin gravida augue justo, eu congue nibh molestie eget. Aliquam dignissim non est porta ultricies. Donec ultrices dolor bibendum, vestibulum nulla in, vehicula urna.</p>
+		</script>
+		<script type="text/template" id="store-template">
+			<p>Nunc ac dui a ante euismod aliquet. Praesent ultricies vehicula ligula, eget cursus libero aliquet in. Sed placerat nunc ac lorem pretium, at varius leo posuere. Vestibulum in lacus dapibus, imperdiet tellus a, convallis elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ipsum purus, suscipit sit amet sagittis eu, ultrices ut massa. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+
+			<p>Duis posuere neque tincidunt pulvinar sollicitudin. Praesent pretium auctor mi, posuere porta nulla posuere a. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in iaculis lorem. Maecenas risus velit, efficitur id enim nec, feugiat lobortis augue. Ut ornare arcu non maximus bibendum. Nam accumsan lacus quis nibh tincidunt, nec eleifend massa posuere. Donec consectetur nulla non nisi congue ornare. Phasellus efficitur pharetra justo ac cursus.</p>
+		</script>
+
+		<!-- Sidebar templates -->
+		<script type="text/template" id="mine-template">
+			<p>Drop pin</p>
+			<p>Look at all my pins</p>
+    	</script>
+    	<script type="text/template" id="search-template">
+    		<p>Searchbar</p>
+    		<p>Filters</p>
+    		<p>Results</p>
+    	</script>
+    	<script type="text/template" id="inspect-template">
+    		<p>Description</p>
+    	</script>
+
+		<!-- TODO: consider zepto instead? -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDw_A1T7lw17fsJaVfJUmQO6Jx6A_vGuUk"></script>
+		<script src="lib/foundation.min.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/views/HomeView.js"></script>
+		<script src="js/views/AboutView.js"></script>
+		<script src="js/views/StoreView.js"></script>
+		<script src="js/views/MineView.js"></script>
+		<script src="js/models/Pin.js"></script>
+		<script src="js/collections/Pins.js"></script>
+	</body>
+</html>

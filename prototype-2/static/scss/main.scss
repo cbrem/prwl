@@ -1,0 +1,18 @@
+$prowl-blue: #2496D5;
+
+h1 {
+	font-size: 100px;
+	color: $prowl-blue;
+}
+
+.icon-bar {
+	background: $prowl-blue;
+
+	a {
+		color: white;
+	}
+}
+
+#map {
+	height: 600px;
+}
