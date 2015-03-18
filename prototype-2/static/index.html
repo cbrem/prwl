@@ -52,20 +52,24 @@
 
 		<!-- Main templates -->
 		<script type="text/template" id="home-template">
-			<div class="small-3 columns">
-				<div class="icon-bar two-up">
-				  	<a class="item">
+			<div class="small-4 columns">
+				<div class="icon-bar three-up">
+				  	<a class="item" id="mine-button">
 				  		<img src="img/general-ui/svg/profile29.svg" width="24px">
 						<label>Mine</label>
 				  	</a>
-				  	<a class="item">
+				  	<a class="item" id="search-button">
 				  		<img src="img/general-ui/svg/globe32.svg" width="24px">
-				    	<label>All</label>
+				    	<label>Search</label>
+				  	</a>
+				  	<a class="item" id="inspect-button">
+				  		<img src="img/general-ui/svg/magnifier52.svg" width="24px">
+				    	<label>Inspect</label>
 				  	</a>
 				</div>
 				<div id="sidebar-anchor"></div>
 			</div>
-			<div class="small-9 columns" id="map"></div>
+			<div class="small-8 columns" id="map-anchor"></div>
 		</script>
 		<script type="text/template" id="about-template">
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet erat vel ante aliquam pulvinar. Integer ultrices, libero ullamcorper convallis accumsan, erat mi ultricies libero, a consectetur elit magna a erat. Suspendisse vestibulum consequat nibh. Duis molestie, elit eu condimentum ultricies, magna magna suscipit dui, eget bibendum turpis elit lacinia leo. Donec elementum, nulla sit amet vehicula elementum, diam libero aliquam nunc, sit amet congue eros ligula non sapien. Nulla lobortis sit amet nisi et placerat. Aliquam erat volutpat. Suspendisse ornare pretium mauris a pulvinar. Duis quis euismod felis. Etiam volutpat pretium vestibulum. Aliquam erat volutpat. Mauris laoreet efficitur arcu, ut ornare mi tempor in. Nulla facilisi.</p>
@@ -80,7 +84,7 @@
 
 		<!-- Sidebar templates -->
 		<script type="text/template" id="mine-template">
-			<p>Drop pin</p>
+			<button id="pin-button">Drop Pin</button>
 			<p>Look at all my pins</p>
     	</script>
     	<script type="text/template" id="search-template">
@@ -103,6 +107,8 @@
 		<script src="js/views/AboutView.js"></script>
 		<script src="js/views/StoreView.js"></script>
 		<script src="js/views/MineView.js"></script>
+		<script src="js/views/SearchView.js"></script>
+		<script src="js/views/InspectView.js"></script>
 		<script src="js/models/Pin.js"></script>
 		<script src="js/collections/Pins.js"></script>
 	</body>

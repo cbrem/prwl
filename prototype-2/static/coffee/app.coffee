@@ -15,12 +15,18 @@ class prowl.Router extends Backbone.Router
 
 	initialize: () ->
 		@mainAnchor = $('#main-anchor')
+		@_viewCache = {}
 
 	# Helper for filling '#main-anchor' with a given template
 	_showView: (name) ->
-		view = new (prowl.views[name])
-		view.render()
-		@mainAnchor.html(view.el)
+		if _.has(@_viewCache, name)
+			view = @_viewCache[name]
+			@mainAnchor.html(view.el)
+		else
+			view = new (prowl.views[name])()
+			view.render()
+			@_viewCache[name] = view
+			@mainAnchor.html(view.el)
 
 	home: () -> @_showView('Home')
 	about: () -> @_showView('About')

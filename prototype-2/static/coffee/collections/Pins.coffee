@@ -1,3 +1,3 @@
 class prowl.collections.Pins extends Backbone.Collection
-	url: 'http://localhost:8888/pins'
+	url: '/pins'
 	model: prowl.models.Pin

@@ -10,12 +10,12 @@ IDs are freaking confusing! But what worked was:
 
 import os
 import bottle
+import json
 
 LOCAL_PORT = 8888
 ROOT = os.path.abspath(os.path.dirname(__file__))
 STATIC_ROOT = os.path.join(ROOT, 'static')
 
-# id => pin
 pins = {}
 
 idCount = 0
@@ -24,50 +24,55 @@ def getID():
 	idCount += 1
 	return idCount
 
-# Get all pins
-@bottle.get('/pins')
-def get_pins():
-	print 'fetch /pins', pins
-	return pins
-
 # Create a new pin
-@bottle.post('/pin')
+@bottle.post('/pins')
 def post_pin():
 	global pins
 	pin = bottle.request.json
 	id = getID()
+	pin['id'] = id
 	pins[id] = pin
-	print 'create /pin', pin, id
-	return {'id': id}
+	print 'create /pins', pin, id
+	return {}
 
 # Get one pin
-@bottle.get('/pin/<id>')
-def get_pins(id):
-	print 'fetch /pin', pins[id], id
+@bottle.get('/pins/<id>')
+def get_pin(id):
+	print 'fetch /pins', pins[id], id
 	return pins[id]
 
+# Get all pins
+@bottle.get('/pins')
+def get_pins():
+	print 'fetch /pins', pins
+
+	# TODO: weird that we have to force conversion to json
+	return json.dumps(pins.values())
+
 # Update a pin
-@bottle.put('/pin/<id>')
+@bottle.put('/pins/<id>')
 def put_pin(id):
 	global pins
 	pin = bottle.request.json
 	pins[id] = pin
-	print 'update /pin', pins[id], id
+	print 'update /pins', pins[id], id
 	return {}
 
 # Delete one pin
-@bottle.delete('/pin/<id>')
+@bottle.delete('/pins/<id>')
 def delete_pin(id):
 	global pins
 	del pins[id]
-	print 'delete /pin', id
+	print 'delete /pins', id
 	return {}
 
 @bottle.route('/<filepath:path>')
 def static(filepath):
     return bottle.static_file(filepath, root=STATIC_ROOT)
 
-bottle.run(
-	host='0.0.0.0',
-	port=int(os.environ.get('PORT', LOCAL_PORT)),
-	reloader=True)
+if __name__ == '__main__':
+	bottle.run(
+		host='0.0.0.0',
+		port=int(os.environ.get('PORT', LOCAL_PORT)),
+		reloader=True,
+		debug=True)
