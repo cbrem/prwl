@@ -1,13 +1,27 @@
 class prowl.views.Mine extends Backbone.View
 	events:
     	"click #pin-button": "dropPin"
+
+	template: _.template($('#mine-template').html())
+
 	initialize: (collection) ->
 		@collection = collection
+		@collection.on('all', @renderMyPins, @)
+
 	render: () ->
-		# TODO: render in pin data
-		template = $('#mine-template').html()
-		@$el.html(_.template(template))
+		@$el.html(@template())
+		@renderMyPins()
 		@
+
+	renderMyPins: () ->
+		pinsDiv = @$el.find('#pins-anchor')
+		pinsDiv.empty()
+		@collection.each((pin) =>
+			# TODO: is was real tired...make sure this is right
+			pinView = new prowl.views.Pin(pin)
+			pinsDiv.append(pinView.render().$el);
+		)
+
 	dropPin: () ->
 		# Drop loading animation on button
 		pinButton = $('#pin-button')

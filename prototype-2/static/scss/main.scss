@@ -6,6 +6,24 @@ h1 {
 	color: $prowl-blue;
 }
 
+h2 {
+	font-size: 50px;
+	color: $prowl-blue;
+}
+
+h3 {
+	font-size: 30px;
+	color: $prowl-blue;
+}
+
+.pin {
+	margin: 10px;
+	padding: 10px;
+	background: $prowl-blue;
+	color: white;
+	cursor: pointer;
+}
+
 .icon-bar {
 	background: $prowl-blue;
 

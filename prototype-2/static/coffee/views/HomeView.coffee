@@ -7,10 +7,9 @@ class prowl.views.Home extends Backbone.View
 		'click #search-button': '_gotoSearch'
 		'click #inspect-button': '_gotoInspect'
 
-
 	initialize: () ->
 		@collection = new prowl.collections.Pins()
-		@collection.on('add', @_updateMap, @)
+		@collection.on('add', @_updateMap, @) # TODO: cheange to all?
 		@collection.fetch()
 
 		@map = null
@@ -23,6 +22,7 @@ class prowl.views.Home extends Backbone.View
 	_gotoInspect: () -> @_renderSidebar('Inspect')
 
 	# Render the sidebar with the given view name
+	# TODO: cache here to avoid re-making views
 	_renderSidebar: (name) ->
 		sidebarDiv = @$el.find('#sidebar-anchor')
 		@sidebarView = new prowl.views[name](@collection)

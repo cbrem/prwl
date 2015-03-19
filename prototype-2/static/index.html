@@ -84,16 +84,29 @@
 
 		<!-- Sidebar templates -->
 		<script type="text/template" id="mine-template">
+			<h2>My Pins</h2>
 			<button id="pin-button">Drop Pin</button>
-			<p>Look at all my pins</p>
+			<hr>
+			<div id="pins-anchor"></div>
     	</script>
     	<script type="text/template" id="search-template">
-    		<p>Searchbar</p>
-    		<p>Filters</p>
+    		<h2>All Pins</h2>
+    		<input type="text" />
+    		<h3>Filters</h3>
+
+    		<!-- TODO: get range sliders in the foundation build -->
+
     		<p>Results</p>
     	</script>
     	<script type="text/template" id="inspect-template">
     		<p>Description</p>
+    	</script>
+    	<script type="text/template" id="pin-template">
+			<div class="pin">
+				<%=pin.get('time')%>
+				<br>
+				@ (<%=pin.get('lat')%>, <%=pin.get('lng')%>)
+			</div>
     	</script>
 
 		<!-- TODO: consider zepto instead? -->
@@ -109,6 +122,7 @@
 		<script src="js/views/MineView.js"></script>
 		<script src="js/views/SearchView.js"></script>
 		<script src="js/views/InspectView.js"></script>
+		<script src="js/views/PinView.js"></script>
 		<script src="js/models/Pin.js"></script>
 		<script src="js/collections/Pins.js"></script>
 	</body>
