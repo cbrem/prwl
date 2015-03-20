@@ -1,12 +1,15 @@
+# TODO: highlight on hover on map...2-way
+
 class prowl.views.Mine extends Backbone.View
 	events:
     	"click #pin-button": "dropPin"
 
 	template: _.template($('#mine-template').html())
 
-	initialize: (collection) ->
+	initialize: ({collection}) ->
 		@collection = collection
-		@collection.on('all', @renderMyPins, @)
+		@collection.on('add', @renderMyPins, @)
+		# TODO: should ^ use 'all'?
 
 	render: () ->
 		@$el.html(@template())

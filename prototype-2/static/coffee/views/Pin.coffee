@@ -7,6 +7,7 @@ class prowl.views.Pin extends Backbone.View
 	# TODO: use model prop for this?
 	initialize: (pin) ->
 		@pin = pin
+		console.log('made pin', pin.get('id'))
 
 	render: () ->
 		@$el.html(@template(pin: @pin))
@@ -14,5 +15,5 @@ class prowl.views.Pin extends Backbone.View
 
 	inspectPin: () ->
 		time = @pin.get('time')
-		console.log("inspect pin #{time}")
-		# TODO: use events to trigger inspect
+		prowl.events.trigger('inspect-pin', @pin)
+		@delegateEvents() # TODO: is this right?  see http://stackoverflow.com/questions/18552478/backbone-view-event-firing-only-once-after-view-is-rendered

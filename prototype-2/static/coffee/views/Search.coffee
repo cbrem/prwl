@@ -1,5 +1,5 @@
 class prowl.views.Search extends Backbone.View
-	initialize: (collection) ->
+	initialize: ({collection}) ->
 		@collection = collection
 	render: () ->
 		template = $('#search-template').html()

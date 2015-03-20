@@ -99,13 +99,33 @@
     		<p>Results</p>
     	</script>
     	<script type="text/template" id="inspect-template">
-    		<p>Description</p>
+    		<h2>Inspect Pin</h2>
+    		<div class="inspected-pin">
+				<%=pin.get('time')%>
+				<br>
+				@ (<%=pin.get('lat')%>, <%=pin.get('lng')%>)
+				<br>
+				<%= pin.get('desc') || 'Add a description below' %>
+				<br>
+				Tags: <%= pin.get('tags').join(', ') %>
+				<hr>
+
+				<!-- TODO: edit location? -->
+				<from id="inspect-pin-form">
+					<input name="desc" type="text" placeholder="Describe what happened" required>
+					<input name="tags" type="text" placeholder="Tags: verbal, physical, etc.">
+					<br>
+					<button id="inspected-pin-submit" type="submit">Report It!</button>
+				</form>
+			</div>
     	</script>
     	<script type="text/template" id="pin-template">
 			<div class="pin">
 				<%=pin.get('time')%>
 				<br>
 				@ (<%=pin.get('lat')%>, <%=pin.get('lng')%>)
+				<br>
+				<%= pin.get('desc') || 'Click to add a description!' %>
 			</div>
     	</script>
 
@@ -116,13 +136,13 @@
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDw_A1T7lw17fsJaVfJUmQO6Jx6A_vGuUk"></script>
 		<script src="lib/foundation.min.js"></script>
 		<script src="js/app.js"></script>
-		<script src="js/views/HomeView.js"></script>
-		<script src="js/views/AboutView.js"></script>
-		<script src="js/views/StoreView.js"></script>
-		<script src="js/views/MineView.js"></script>
-		<script src="js/views/SearchView.js"></script>
-		<script src="js/views/InspectView.js"></script>
-		<script src="js/views/PinView.js"></script>
+		<script src="js/views/Home.js"></script>
+		<script src="js/views/About.js"></script>
+		<script src="js/views/Store.js"></script>
+		<script src="js/views/Mine.js"></script>
+		<script src="js/views/Search.js"></script>
+		<script src="js/views/Inspect.js"></script>
+		<script src="js/views/Pin.js"></script>
 		<script src="js/models/Pin.js"></script>
 		<script src="js/collections/Pins.js"></script>
 	</body>

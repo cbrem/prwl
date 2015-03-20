@@ -5,5 +5,6 @@ class prowl.models.Pin extends Backbone.Model
         lng: 0.0
         time: 0
         desc: ''
+        tags: []
 
     initialize: () -> @

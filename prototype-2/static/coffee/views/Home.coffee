@@ -9,25 +9,41 @@ class prowl.views.Home extends Backbone.View
 
 	initialize: () ->
 		@collection = new prowl.collections.Pins()
-		@collection.on('add', @_updateMap, @) # TODO: cheange to all?
+		@collection.on('add', @_updateMap, @)
 		@collection.fetch()
 
 		@map = null
 		@sidebar = null
 
+		@_viewCache = {}
+
+		prowl.events.on('inspect-pin', @_gotoInspect, @)
+
 		@
 
-	_gotoMine: () -> @_renderSidebar('Mine')
-	_gotoSearch: () -> @_renderSidebar('Search')
-	_gotoInspect: () -> @_renderSidebar('Inspect')
+	_gotoMine: () -> @_renderSidebar('Mine', {}, true)
+	_gotoSearch: () -> @_renderSidebar('Search', {}, true)
+	_gotoInspect: (id) ->
+		pin = @collection.get(id)
+		@_renderSidebar('Inspect', pin: pin, false)
 
 	# Render the sidebar with the given view name
-	# TODO: cache here to avoid re-making views
-	_renderSidebar: (name) ->
+	_renderSidebar: (name, args, cache) ->
 		sidebarDiv = @$el.find('#sidebar-anchor')
-		@sidebarView = new prowl.views[name](@collection)
-		@sidebarView.render()
-		sidebarDiv.html(@sidebarView.$el)
+		args = _.extend(collection: @collection, args)
+		@_cachedRender(name, sidebarDiv, args, cache)
+
+	# TODO: reuse this other places!
+	_cachedRender: (name, $el, args, cache) ->
+		if _.has(@_viewCache, name) and cache
+			view = @_viewCache[name]
+			$el.html(view.el)
+		else
+			view = new (prowl.views[name])(args)
+			view.render()
+			view.delegateEvents()
+			@_viewCache[name] = view
+			$el.html(view.el)
 
 	# Redraw all pins on the map
 	_updateMap: () ->
@@ -42,7 +58,6 @@ class prowl.views.Home extends Backbone.View
 		    	)
 		    	google.maps.event.addListener(marker, 'click', () -> alert(title))
 			)
-
 
 	render: () ->
 		# Render frame
