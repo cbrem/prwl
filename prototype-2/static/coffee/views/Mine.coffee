@@ -1,4 +1,5 @@
 # TODO: highlight on hover on map...2-way
+# TODO: change so that it updates pins when they're edited not just added
 
 class prowl.views.Mine extends Backbone.View
 	events:
@@ -8,22 +9,23 @@ class prowl.views.Mine extends Backbone.View
 
 	initialize: ({collection}) ->
 		@collection = collection
-		@collection.on('add', @renderMyPins, @)
+		@collection.on('add', @addPin, @)
 		# TODO: should ^ use 'all'?
 
 	render: () ->
 		@$el.html(@template())
-		@renderMyPins()
-		@
-
-	renderMyPins: () ->
 		pinsDiv = @$el.find('#pins-anchor')
-		pinsDiv.empty()
 		@collection.each((pin) =>
 			# TODO: is was real tired...make sure this is right
 			pinView = new prowl.views.Pin(pin)
 			pinsDiv.append(pinView.render().$el);
 		)
+		@
+
+	addPin: (pin) ->
+		pinsDiv = @$el.find('#pins-anchor')
+		pinView = new prowl.views.Pin(pin)
+		pinsDiv.append(pinView.render().$el);
 
 	dropPin: () ->
 		# Drop loading animation on button

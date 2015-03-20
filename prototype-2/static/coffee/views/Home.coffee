@@ -13,7 +13,7 @@ class prowl.views.Home extends Backbone.View
 		@collection.fetch()
 
 		@map = null
-		@sidebar = null
+		@view = null
 
 		@_viewCache = {}
 
@@ -35,15 +35,14 @@ class prowl.views.Home extends Backbone.View
 
 	# TODO: reuse this other places!
 	_cachedRender: (name, $el, args, cache) ->
+		if @view? then @view.$el.detach()
 		if _.has(@_viewCache, name) and cache
-			view = @_viewCache[name]
-			$el.html(view.el)
+			@view = @_viewCache[name]
 		else
-			view = new (prowl.views[name])(args)
-			view.render()
-			view.delegateEvents()
-			@_viewCache[name] = view
-			$el.html(view.el)
+			@view = new (prowl.views[name])(args)
+			@view.render()
+			@_viewCache[name] = @view
+		$el.append(@view.$el)
 
 	# Redraw all pins on the map
 	_updateMap: () ->

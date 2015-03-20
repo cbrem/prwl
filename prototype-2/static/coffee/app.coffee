@@ -15,17 +15,18 @@ class prowl.Router extends Backbone.Router
 
 	initialize: () ->
 		@_viewCache = {}
+		@view = null
 
-	# TODO: reuse this other places! anywhere that has sub-views
-	_cachedRender: (name, $el, args) ->
-		if _.has(@_viewCache, name)
-			view = @_viewCache[name]
-			$el.html(view.el)
+	# TODO: reuse this other places!
+	_cachedRender: (name, $el, args, cache) ->
+		if @view? then @view.$el.detach()
+		if _.has(@_viewCache, name) and cache
+			@view = @_viewCache[name]
 		else
-			view = new (prowl.views[name])(args)
-			view.render()
-			@_viewCache[name] = view
-			$el.html(view.el)
+			@view = new (prowl.views[name])(args)
+			@view.render()
+			@_viewCache[name] = @view
+		$el.append(@view.$el)
 
 	home: () -> @_cachedRender('Home', $('#main-anchor'), {})
 	about: () -> @_cachedRender('About', $('#main-anchor'), {})
