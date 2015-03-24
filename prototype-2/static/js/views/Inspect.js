@@ -64,6 +64,7 @@
         return;
       }
       this.pin.get('comments').push(comment);
+      this.pin.save();
       return this.pin.trigger('change');
     };
 
