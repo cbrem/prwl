@@ -1,20 +1,28 @@
-# need to change view caching so that we dont always enter with the same pin on inspect
-
+# TODO: need to bind to create comment
 class prowl.views.Inspect extends Backbone.View
 	events:
 		"click #inspected-pin-submit": "submit"
+		"keydown #comment-text": "checkCodes"
 
 	# TODO: always include templates in this form
 	template: _.template($('#inspect-template').html())
 
+	checkCodes: (e) ->
+		NEWLINE = 13
+
+		# TODO: switch
+		if e.which == NEWLINE
+			@addComment()
+
 	initialize: ({collection, pin}) ->
 		@collection = collection
 		@pin = pin
-		@pin.on('all', @render, @)
+		@pin.on('add remove change reset', @render, @)
 
 	render: () ->
 		@$el.html(@template(pin: @pin))
 
+		# Zoom to pin
 		pos = new google.maps.LatLng(@pin.get('lat'), @pin.get('lng'))
 		prowl.map.setCenter(pos)
 		prowl.map.setZoom(11)
@@ -32,6 +40,15 @@ class prowl.views.Inspect extends Backbone.View
 		)
 		@pin.save()
 		prowl.events.trigger('goto-mine')
+
+	addComment: () ->
+		# Validation
+		comment = $('#comment-text').val().trim()
+		if not comment
+			return
+
+		@pin.get('comments').push(comment)
+		@pin.trigger('change')
 
 	_parseTags: (tagStr) ->
 		if tagStr?

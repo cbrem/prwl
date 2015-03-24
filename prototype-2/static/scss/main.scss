@@ -35,6 +35,13 @@ p {
 	cursor: pointer;
 }
 
+.comment {
+	margin: 10px;
+	padding: 10px;
+	background: $prowl-blue;
+	color: white;
+}
+
 .icon-bar {
 	background: $prowl-blue;
 
@@ -49,11 +56,16 @@ button {
 }
 
 #map-anchor {
-	height: 450px;
+	height: 600px;
 }
 
 #mine-pins-anchor {
-	height: 150px;
+	height: 300px;
+	overflow: scroll;
+}
+
+#comment-anchor {
+	height: 200px;
 	overflow: scroll;
 }
 

@@ -8,7 +8,7 @@ class prowl.views.Home extends Backbone.View
 
 	initialize: () ->
 		@collection = new prowl.collections.Pins()
-		@collection.on('all', @_updateMap, @)
+		@collection.on('add remove change reset', @_updateMap, @)
 		@collection.fetch()
 
 		@map = null

@@ -110,6 +110,18 @@
 					<button id="inspected-pin-submit" type="submit">Report It!</button>
 				</form>
 			</div>
+
+			<hr>
+
+			<h2>Comments</h2>
+			<input type="text" id="comment-text" placeholder="Leave a comment">
+			<div id="comment-anchor">
+				<% _.each(pin.get('comments'), function(comment) { %>
+					<div class="comment">
+						<%= comment %>
+					</div>
+				<% }) %>
+			</div>
     	</script>
     	<script type="text/template" id="pin-template">
 			<div class="pin">

@@ -1,11 +1,16 @@
 class prowl.views.Search extends Backbone.View
 	events:
-		'keyup #search-input': 'checkForNewline'
+		'keyup #search-input': 'checkCodes'
 
-	checkForNewline: (e) ->
+	checkCodes: (e) ->
 		NEWLINE = 13
+		BACKSPACE = 8
+
+		# TODO: switch
 		if e.which == NEWLINE
 			@search()
+		else if e.which == BACKSPACE
+			@clear()
 
 	search: () ->
 		tag = $('#search-input').val().trim()
@@ -18,6 +23,10 @@ class prowl.views.Search extends Backbone.View
 			pinView = new prowl.views.Pin(pin)
 			anchor.append(pinView.render().$el);
 		)
+
+	clear: () ->
+		anchor = $('#search-pins-anchor')
+		anchor.empty()
 
 	initialize: ({collection}) ->
 		@collection = collection

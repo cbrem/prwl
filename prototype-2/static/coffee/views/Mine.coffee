@@ -9,7 +9,7 @@ class prowl.views.Mine extends Backbone.View
 
 	initialize: ({collection}) ->
 		@collection = collection
-		@collection.on('all', @_updatePins, @)
+		@collection.on('add remove change reset', @_updatePins, @)
 
 	render: () ->
 		@$el.html(@template())
