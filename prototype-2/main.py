@@ -1,6 +1,6 @@
 '''
 TODO:
-* currently, the server is giving out ids. Can bottle do ids on the client? Should it?
+* currently, the server is giving out ids. Can flask do ids on the client? Should it?
 
 IDs are freaking confusing! But what worked was:
 * our js specifically sets 'id' before sending a POST. the response is exactly what we got
@@ -8,14 +8,15 @@ IDs are freaking confusing! But what worked was:
 * PUTs do *not* have the ID as a field when ember auto-sends them, but we get it from the route, and set it as a field for the response
 '''
 
+from flask import Flask, send_file, request
 import os
-import bottle
 import json
 
 LOCAL_PORT = 8888
 ROOT = os.path.abspath(os.path.dirname(__file__))
 STATIC_ROOT = os.path.join(ROOT, 'static')
 
+app = Flask(__name__, static_url_path='')
 pins = {}
 
 idCount = 0
@@ -25,10 +26,10 @@ def getID():
 	return idCount
 
 # Create a new pin
-@bottle.post('/pins')
+@app.route('/pins', methods=['POST'])
 def post_pin():
 	global pins
-	pin = bottle.request.json
+	pin = request.json
 	id = getID()
 	pin['id'] = id
 	pins[id] = pin
@@ -36,13 +37,13 @@ def post_pin():
 	return {}
 
 # Get one pin
-@bottle.get('/pins/<id>')
+@app.route('/pins/<id>', methods=['GET'])
 def get_pin(id):
 	print 'fetch /pins', pins[id], id
 	return pins[id]
 
 # Get all pins
-@bottle.get('/pins')
+@app.route('/pins', methods=['GET'])
 def get_pins():
 	print 'fetch /pins', pins
 
@@ -50,29 +51,24 @@ def get_pins():
 	return json.dumps(pins.values())
 
 # Update a pin
-@bottle.put('/pins/<id>')
+@app.route('/pins/<id>', methods=['PUT'])
 def put_pin(id):
 	global pins
-	pin = bottle.request.json
+	pin = request.json
 	pins[id] = pin
 	print 'update /pins', pins[id], id
 	return {}
 
 # Delete one pin
-@bottle.delete('/pins/<id>')
+@app.route('/pins/<id>', methods=['DELETE'])
 def delete_pin(id):
 	global pins
 	del pins[id]
 	print 'delete /pins', id
 	return {}
 
-@bottle.route('/<filepath:path>')
-def static(filepath):
-    return bottle.static_file(filepath, root=STATIC_ROOT)
-
 if __name__ == '__main__':
-	bottle.run(
+    app.run(
 		host='0.0.0.0',
 		port=int(os.environ.get('PORT', LOCAL_PORT)),
-		reloader=True,
 		debug=True)
