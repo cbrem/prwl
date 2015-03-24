@@ -7,7 +7,6 @@ class prowl.views.Pin extends Backbone.View
 	# TODO: use model prop for this?
 	initialize: (pin) ->
 		@pin = pin
-		console.log('made pin', pin.get('id'))
 
 	render: () ->
 		@$el.html(@template(pin: @pin))
@@ -15,4 +14,4 @@ class prowl.views.Pin extends Backbone.View
 
 	inspectPin: () ->
 		time = @pin.get('time')
-		prowl.events.trigger('inspect-pin', @pin)
+		prowl.events.trigger('goto-inspect', @pin)

@@ -9,29 +9,28 @@ class prowl.views.Mine extends Backbone.View
 
 	initialize: ({collection}) ->
 		@collection = collection
-		@collection.on('add', @addPin, @)
-		# TODO: should ^ use 'all'?
+		@collection.on('all', @_updatePins, @)
 
 	render: () ->
 		@$el.html(@template())
-		pinsDiv = @$el.find('#pins-anchor')
+		@
+
+	_updatePins: (pin) ->
+		pinsDiv = @$el.find('#mine-pins-anchor')
+		pinsDiv.empty()
 		@collection.each((pin) =>
-			# TODO: is was real tired...make sure this is right
 			pinView = new prowl.views.Pin(pin)
 			pinsDiv.append(pinView.render().$el);
 		)
-		@
-
-	addPin: (pin) ->
-		pinsDiv = @$el.find('#pins-anchor')
-		pinView = new prowl.views.Pin(pin)
-		pinsDiv.append(pinView.render().$el);
 
 	dropPin: () ->
 		# Drop loading animation on button
 		pinButton = $('#pin-button')
-		spinner = $('<img>', src: 'img/spinner.gif')
-		pinButton.append(spinner)
+		loader = $('<img>',
+			src: 'img/loader.gif'
+			class: 'right'
+			width: '128')
+		pinButton.after(loader)
 
 		if navigator.geolocation?
 			# Set location to user's location
@@ -45,8 +44,10 @@ class prowl.views.Mine extends Backbone.View
 				# TODO: do some triggering magic here so that we can add a pin on the parent view
 				pin.save()
 				@collection.add(pin)
-				spinner.remove()
-			fail = (e) -> console.log(e.message)
+				loader.remove()
+			fail = (e) ->
+				console.log(e.message)
+				loader.remove()
 
 			# TODO: maybe may a helper class to reduce duplication with geolocation,
 			# and also so we can use watchPostion instead

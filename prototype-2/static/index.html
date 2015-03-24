@@ -6,7 +6,6 @@
 		<title>Prowl</title>
 		<link href="lib/foundation.min.css" rel="stylesheet">
 		<link href="css/main.css" rel="stylesheet">
-
 	</head>
 	<body>
 		<div id="main">
@@ -30,22 +29,18 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="small-3 columns">
-					<img src="img/cat2.jpg">
-				</div>
-				<div class="small-9 columns">
-					<h1>PROWL</h1>
-				</div>
+					<img src="img/cat2.jpg" width="192px" class="left">
+					<h1>PRWL</h1>
 			</div>
 
 			<!-- Templates attach here -->
 			<div class="row" id="main-anchor"></div>
 
 			<!-- Footer -->
-			<div class="row">
+			<div class="row" id="footer">
 				<div class="small-12 columns">
 					<!-- TODO: attribution for icons -->
-					<p>Footer</p>
+					<p>Contact us: TODO</p>
 				</div>
 			</div>
 		</div>
@@ -87,16 +82,13 @@
 			<h2>My Pins</h2>
 			<button id="pin-button">Drop Pin</button>
 			<hr>
-			<div id="pins-anchor"></div>
+			<div id="mine-pins-anchor"></div>
     	</script>
     	<script type="text/template" id="search-template">
-    		<h2>All Pins</h2>
-    		<input type="text" />
-    		<h3>Filters</h3>
-
-    		<!-- TODO: get range sliders in the foundation build -->
-
-    		<p>Results</p>
+    		<h2>Search Pins</h2>
+			<input id="search-input" type="text" placeholder="Tags: 'physical', 'verbal', ...">
+			<hr>
+    		<div id="search-pins-anchor"></div>
     	</script>
     	<script type="text/template" id="inspect-template">
     		<h2>Inspect Pin</h2>
@@ -113,7 +105,7 @@
 				<!-- TODO: edit location? -->
 				<from id="inspect-pin-form">
 					<input name="desc" type="text" placeholder="Describe what happened" required>
-					<input name="tags" type="text" placeholder="Tags: verbal, physical, etc.">
+					<input name="tags" type="text" placeholder="Tags: 'physical', 'verbal', ...">
 					<br>
 					<button id="inspected-pin-submit" type="submit">Report It!</button>
 				</form>

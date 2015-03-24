@@ -1,19 +1,30 @@
 $prowl-blue: #2496D5;
 $prowl-purple: #A34188;
+$prowl-gray: #BBBBBB;
+$prowl-heading-fonts: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+
+$icon-bar-image-height: 1rem;
 
 h1 {
-	font-size: 100px;
+	font-size: 80px;
+	font-family: $prowl-heading-fonts;
 	color: $prowl-blue;
 }
 
 h2 {
 	font-size: 50px;
+	font-family: $prowl-heading-fonts;
 	color: $prowl-blue;
 }
 
 h3 {
 	font-size: 30px;
+	font-family: $prowl-heading-fonts;
 	color: $prowl-blue;
+}
+
+p {
+	color: $prowl-gray;
 }
 
 .pin, .inspected-pin {
@@ -32,6 +43,24 @@ h3 {
 	}
 }
 
+button {
+	background: $prowl-blue;
+	border: solid 1px white;
+}
+
 #map-anchor {
-	height: 600px;
+	height: 450px;
+}
+
+#mine-pins-anchor {
+	height: 150px;
+	overflow: scroll;
+}
+
+#footer {
+	text-align: center;
+}
+
+.row {
+	margin-bottom: 10px;
 }

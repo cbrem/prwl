@@ -5,11 +5,10 @@ class prowl.views.Home extends Backbone.View
 	events:
 		'click #mine-button': '_gotoMine'
 		'click #search-button': '_gotoSearch'
-		'click #inspect-button': '_gotoInspect'
 
 	initialize: () ->
 		@collection = new prowl.collections.Pins()
-		@collection.on('add', @_updateMap, @)
+		@collection.on('all', @_updateMap, @)
 		@collection.fetch()
 
 		@map = null
@@ -17,7 +16,8 @@ class prowl.views.Home extends Backbone.View
 
 		@_viewCache = {}
 
-		prowl.events.on('inspect-pin', @_gotoInspect, @)
+		prowl.events.on('goto-inspect', @_gotoInspect, @)
+		prowl.events.on('goto-mine', @_gotoMine, @)
 
 		@
 
@@ -69,7 +69,7 @@ class prowl.views.Home extends Backbone.View
 		# Render map
 		opt = zoom: 11
 		mapDiv = @$el.find('#map-anchor')[0]
-		@map = new google.maps.Map(mapDiv, opt)
+		prowl.map = @map = new google.maps.Map(mapDiv, opt)
 		@_updateMap()
 
 		# Set location to user's location
