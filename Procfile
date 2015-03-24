@@ -1,1 +1,1 @@
-web: python prototype/server/main.py
+web: python prototype-2/server/main.py
