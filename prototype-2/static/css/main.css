@@ -1,0 +1,58 @@
+h1 {
+  font-size: 80px;
+  font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+  color: #2496D5; }
+
+h2 {
+  font-size: 50px;
+  font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+  color: #2496D5; }
+
+h3 {
+  font-size: 30px;
+  font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+  color: #2496D5; }
+
+p {
+  color: #BBBBBB; }
+
+.pin, .inspected-pin {
+  margin: 10px;
+  padding: 10px;
+  background: #2496D5;
+  color: white;
+  cursor: pointer; }
+
+.comment {
+  margin: 10px;
+  padding: 10px;
+  background: #2496D5;
+  color: white; }
+
+.icon-bar {
+  background: #2496D5; }
+  .icon-bar a {
+    color: white; }
+
+button {
+  background: #2496D5;
+  border: solid 1px white; }
+
+#map-anchor {
+  height: 600px; }
+
+#mine-pins-anchor {
+  height: 300px;
+  overflow: scroll; }
+
+#comment-anchor {
+  height: 200px;
+  overflow: scroll; }
+
+#footer {
+  text-align: center; }
+
+.row {
+  margin-bottom: 10px; }
+
+/*# sourceMappingURL=main.css.map */
