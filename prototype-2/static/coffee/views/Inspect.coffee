@@ -48,6 +48,7 @@ class prowl.views.Inspect extends Backbone.View
 			return
 
 		@pin.get('comments').push(comment)
+		@pin.save()
 		@pin.trigger('change')
 
 	_parseTags: (tagStr) ->
