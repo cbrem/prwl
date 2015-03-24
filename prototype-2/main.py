@@ -8,7 +8,7 @@ IDs are freaking confusing! But what worked was:
 * PUTs do *not* have the ID as a field when ember auto-sends them, but we get it from the route, and set it as a field for the response
 '''
 
-from flask import Flask, send_file, request
+from flask import Flask, send_file, request, jsonify
 import os
 import json
 
@@ -25,6 +25,8 @@ def getID():
 	idCount += 1
 	return idCount
 
+def jsonResponse(d): return jsonify(**d)
+
 # Create a new pin
 @app.route('/pins', methods=['POST'])
 def post_pin():
@@ -34,38 +36,39 @@ def post_pin():
 	pin['id'] = id
 	pins[id] = pin
 	print 'create /pins', pin, id
-	return {}
+	return jsonResponse(pin)
 
 # Get one pin
 @app.route('/pins/<id>', methods=['GET'])
 def get_pin(id):
+	id = int(id)
 	print 'fetch /pins', pins[id], id
-	return pins[id]
+	return jsonResponse(pins[id])
 
 # Get all pins
 @app.route('/pins', methods=['GET'])
 def get_pins():
-	print 'fetch /pins', pins
-
-	# TODO: weird that we have to force conversion to json
-	return json.dumps(pins.values())
+	print 'fetch all /pins', pins
+	return jsonResponse({'pins': pins.values()})
 
 # Update a pin
 @app.route('/pins/<id>', methods=['PUT'])
 def put_pin(id):
 	global pins
+	id = int(id)
 	pin = request.json
 	pins[id] = pin
 	print 'update /pins', pins[id], id
-	return {}
+	return jsonResponse({})
 
 # Delete one pin
 @app.route('/pins/<id>', methods=['DELETE'])
 def delete_pin(id):
 	global pins
+	id = int(id)
 	del pins[id]
 	print 'delete /pins', id
-	return {}
+	return jsonResponse({})
 
 if __name__ == '__main__':
     app.run(

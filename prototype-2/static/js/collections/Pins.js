@@ -14,6 +14,10 @@
 
     Pins.prototype.model = prowl.models.Pin;
 
+    Pins.prototype.parse = function(res, xhr) {
+      return res.pins;
+    };
+
     return Pins;
 
   })(Backbone.Collection);
