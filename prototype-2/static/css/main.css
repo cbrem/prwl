@@ -16,6 +16,10 @@ h3 {
 p {
   color: #BBBBBB; }
 
+ul {
+  color: #BBBBBB;
+  margin-left: 40px; }
+
 .pin, .inspected-pin {
   margin: 10px;
   padding: 10px;
@@ -34,9 +38,18 @@ p {
   .icon-bar a {
     color: white; }
 
+a :link {
+  color: #2496D5; }
+a :visited {
+  color: #A34188; }
+
 button {
   background: #2496D5;
   border: solid 1px white; }
+
+#about-container {
+  overflow: scroll;
+  height: 450px; }
 
 #map-anchor {
   height: 600px; }

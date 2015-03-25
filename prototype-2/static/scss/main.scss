@@ -27,6 +27,11 @@ p {
 	color: $prowl-gray;
 }
 
+ul {
+	color: $prowl-gray;
+	margin-left: 40px;
+}
+
 .pin, .inspected-pin {
 	margin: 10px;
 	padding: 10px;
@@ -50,9 +55,24 @@ p {
 	}
 }
 
+a {
+	:link {
+		color: $prowl-blue;
+	}
+
+	:visited {
+		color: $prowl-purple;
+	}
+}
+
 button {
 	background: $prowl-blue;
 	border: solid 1px white;
+}
+
+#about-container {
+	overflow: scroll;
+	height: 450px;
 }
 
 #map-anchor {

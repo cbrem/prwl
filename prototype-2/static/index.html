@@ -3,7 +3,31 @@
 	<head>
 		<!-- TODO: tags for SEO -->
 		<meta charset="utf-8">
-		<title>Prowl</title>
+		<title>Prwl.org</title>
+
+		<!-- ****** faviconit.com favicons ****** -->
+		<link rel="shortcut icon" href="img/faviconitimg/faviconit/favicon.ico">
+		<link rel="icon" sizes="16x16 32x32 64x64" href="img/faviconit/favicon.ico">
+		<link rel="icon" type="image/png" sizes="196x196" href="img/faviconit/favicon-192.png">
+		<link rel="icon" type="image/png" sizes="160x160" href="img/faviconit/favicon-160.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="img/faviconit/favicon-96.png">
+		<link rel="icon" type="image/png" sizes="64x64" href="img/faviconit/favicon-64.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="img/faviconit/favicon-32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="img/faviconit/favicon-16.png">
+		<link rel="apple-touch-icon" href="img/faviconit/favicon-57.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="img/faviconit/favicon-114.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="img/faviconit/favicon-72.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="img/faviconit/favicon-144.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="img/faviconit/favicon-60.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="img/faviconit/favicon-120.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="img/faviconit/favicon-76.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="img/faviconit/favicon-152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="img/faviconit/favicon-180.png">
+		<meta name="msapplication-TileColor" content="#FFFFFF">
+		<meta name="msapplication-TileImage" content="/favicon-144.png">
+		<meta name="msapplication-config" content="/browserconfig.xml">
+		<!-- ****** faviconit.com favicons ****** -->
+
 		<link href="lib/foundation.min.css" rel="stylesheet">
 		<link href="css/main.css" rel="stylesheet">
 	</head>
@@ -29,7 +53,7 @@
 				</div>
 			</div>
 			<div class="row">
-					<img src="img/cat2.jpg" width="192px" class="left">
+					<img id="logo" src="img/cat2.jpg" width="192px" class="left">
 					<h1>PRWL</h1>
 			</div>
 
@@ -67,14 +91,40 @@
 			<div class="small-8 columns" id="map-anchor"></div>
 		</script>
 		<script type="text/template" id="about-template">
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet erat vel ante aliquam pulvinar. Integer ultrices, libero ullamcorper convallis accumsan, erat mi ultricies libero, a consectetur elit magna a erat. Suspendisse vestibulum consequat nibh. Duis molestie, elit eu condimentum ultricies, magna magna suscipit dui, eget bibendum turpis elit lacinia leo. Donec elementum, nulla sit amet vehicula elementum, diam libero aliquam nunc, sit amet congue eros ligula non sapien. Nulla lobortis sit amet nisi et placerat. Aliquam erat volutpat. Suspendisse ornare pretium mauris a pulvinar. Duis quis euismod felis. Etiam volutpat pretium vestibulum. Aliquam erat volutpat. Mauris laoreet efficitur arcu, ut ornare mi tempor in. Nulla facilisi.</p>
+			<div id="about-container" class="row">
+				<div class="small-8 small-centered columns">
+					<h3>What is PRWL?</h3><hr>
+					<p>PRWL is a non-profit combatting street harassment though a mobile web- app!</p>
 
-			<p>Aenean at arcu dapibus, eleifend odio at, accumsan eros. Ut vel felis diam. Donec nec risus quis libero scelerisque gravida vel et neque. Sed id purus rutrum, hendrerit dui eu, vestibulum turpis. Ut sit amet orci et elit volutpat vulputate. Donec id massa felis. Donec a faucibus quam. Cras dolor ex, varius sed nibh quis, suscipit porttitor ipsum. Ut eu fringilla odio. Proin gravida augue justo, eu congue nibh molestie eget. Aliquam dignissim non est porta ultricies. Donec ultrices dolor bibendum, vestibulum nulla in, vehicula urna.</p>
+					<h3>Who is PRWL for?</h3><hr>
+					<p>PRWL does not view street harassment as an issue limited to one age, gender identity/expression, sexuality, physical ability, or race. It's an issue affecting everyone, and we hope to include everyone in our efforts to raise awareness of and understand street harassment, and ultimately make our streets a more inclusive and safe environment.</p>
+
+					<h3>What will PRWL accomplish?</h3><hr>
+					<p>Our four core purposes to achieve that level of comfort and safety in our urban environments are:</p>
+
+						<ul>
+							<li>Bringing awareness to street harassment as a serious and widespread issue.</li>
+							<li>Creating a community of users who have shared similar experiences and can discuss them and provide each other support.</li>
+							<li>Collecting data/testimonies on the circumstances of harassment (which will be made available to city planners, police, etc). We understand that PRWL won't end street harassment, but collecting mass information on the issue is the first step to a solid solution.</li>
+							<li>Providing safer routes of travel.</li>
+						</ul>
+
+					<h3>Where will donations go?</h3><hr>
+					<p>Funding for PRWL would mainly contribute both to development of the app and maintaining our servers. We're also hoping to get some initial funding on creating swag to be made available for all of you.</p>
+
+					<h3>Where can I get more information?</h3><hr>
+					<p>See our <a href="https://www.facebook.com/prwl.org">Facebook</a> for more information.</p>
+
+					<!-- TODO: more links, donation links -->
+				</div>
+			</div>
 		</script>
 		<script type="text/template" id="store-template">
-			<p>Nunc ac dui a ante euismod aliquet. Praesent ultricies vehicula ligula, eget cursus libero aliquet in. Sed placerat nunc ac lorem pretium, at varius leo posuere. Vestibulum in lacus dapibus, imperdiet tellus a, convallis elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ipsum purus, suscipit sit amet sagittis eu, ultrices ut massa. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-
-			<p>Duis posuere neque tincidunt pulvinar sollicitudin. Praesent pretium auctor mi, posuere porta nulla posuere a. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in iaculis lorem. Maecenas risus velit, efficitur id enim nec, feugiat lobortis augue. Ut ornare arcu non maximus bibendum. Nam accumsan lacus quis nibh tincidunt, nec eleifend massa posuere. Donec consectetur nulla non nisi congue ornare. Phasellus efficitur pharetra justo ac cursus.</p>
+			<div class="row">
+				<div class="small-8 small-centered columns">
+					<h3>Coming Soon!</h3>
+				</div>
+			</div>
 		</script>
 
 		<!-- Sidebar templates -->
