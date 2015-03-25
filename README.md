@@ -1,6 +1,17 @@
-Prowl is a web-app built to track occurences of street harassment and give victims of harassment a safe place to discuss their experiences.
+V2 of the Prowl app.
 
-Currently, we're just prototyping. But eventually, we hope to offer free clients for:
-* Web
-* Android
-* iOS
+Frontend technologies:
+* Backbone.js
+* CoffeeScript
+* Sass
+
+Backend technologies:
+* Flask
+
+To develop:
+
+	# To compile all .scss file to .css
+	sass --watch scss:css
+
+	# To compile all .js files to .coffee
+	coffee -cw -o js/ coffee/
