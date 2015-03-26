@@ -29,6 +29,7 @@ class prowl.views.Inspect extends Backbone.View
 
 		@
 
+	# TODO: this doesn't appear to be persisting correctly in chrome
 	submit: () ->
 		# TODO: form validation?
 		form = $('#inspect-pin-form')

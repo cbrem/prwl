@@ -12,6 +12,8 @@
 
     Pin.prototype.urlRoot = "/pins";
 
+    Pin.prototype.idAttribute = "_id";
+
     Pin.prototype.defaults = {
       lat: 0.0,
       lng: 0.0,
