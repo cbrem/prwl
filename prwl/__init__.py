@@ -17,5 +17,7 @@ app = Flask(
 	static_url_path='')
 app.json_encoder=BSONEncoder
 app.json_decoder=BSONDecoder
+app.config['MONGO_URI'] = 'mongodb://heroku_app34586748:pLdVbAiXmlJCR9F7uw7R@ds031631.mongolab.com:31631/heroku_app34586748'
 mongo = PyMongo(app)
+print type(mongo)
 from prwl import views
