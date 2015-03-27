@@ -14,13 +14,15 @@
 
     Pin.prototype.idAttribute = "_id";
 
-    Pin.prototype.defaults = {
-      lat: 0.0,
-      lng: 0.0,
-      time: 0,
-      desc: '',
-      tags: [],
-      comments: []
+    Pin.prototype.defaults = function() {
+      return {
+        lat: 0.0,
+        lng: 0.0,
+        time: 0,
+        desc: '',
+        tags: [],
+        comments: []
+      };
     };
 
     Pin.prototype.initialize = function() {

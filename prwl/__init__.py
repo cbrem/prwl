@@ -10,6 +10,12 @@ IDs are freaking confusing! But what worked was:
 
 from flask import Flask
 from flask.ext.pymongo import PyMongo
-app = Flask(__name__, static_url_path='')
+from util import BSONEncoder, BSONDecoder
+
+app = Flask(
+	__name__,
+	static_url_path='')
+app.json_encoder=BSONEncoder
+app.json_decoder=BSONDecoder
 mongo = PyMongo(app)
 from prwl import views

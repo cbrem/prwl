@@ -1,6 +1,7 @@
 from flask import request
 from util import jsonResponse
 from prwl import app, mongo
+from bson.objectid import ObjectId
 
 """
 TODO:
@@ -40,11 +41,12 @@ def get_pins():
 def put_pin(_id):
 	pin = request.json
 	print 'put', _id, pin
-	mongo.db.pins.update({'_id': _id}, pin)
+	mongo.db.pins.update({'_id': ObjectId(_id)}, pin)
 	return jsonResponse({})
 
 # Delete one pin
 @app.route('/pins/<_id>', methods=['DELETE'])
 def delete_pin(_id):
-	mongo.db.pins.delete_one({'_id': _id})
+	del pin['_id']
+	mongo.db.pins.delete_one({'_id': ObjectId(_id)})
 	return jsonResponse({})

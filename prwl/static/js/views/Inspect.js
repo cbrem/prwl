@@ -49,10 +49,16 @@
       form = $('#inspect-pin-form');
       desc = form.find("[name=desc]").val();
       tagStr = form.find("[name=tags]").val();
-      this.pin.set({
-        desc: desc,
-        tags: this._parseTags(tagStr)
-      });
+      if (desc) {
+        this.pin.set({
+          desc: desc
+        });
+      }
+      if (tagStr) {
+        this.pin.set({
+          tags: this._parseTags(tagStr)
+        });
+      }
       this.pin.save();
       return prowl.events.trigger('goto-mine');
     };

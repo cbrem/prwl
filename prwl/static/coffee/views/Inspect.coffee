@@ -35,10 +35,8 @@ class prowl.views.Inspect extends Backbone.View
 		form = $('#inspect-pin-form')
 		desc = form.find("[name=desc]").val()
 		tagStr = form.find("[name=tags]").val()
-		@pin.set(
-			desc: desc
-			tags: @_parseTags(tagStr)
-		)
+		if desc then @pin.set(desc: desc)
+		if tagStr then @pin.set(tags: @_parseTags(tagStr))
 		@pin.save()
 		prowl.events.trigger('goto-mine')
 
@@ -48,6 +46,8 @@ class prowl.views.Inspect extends Backbone.View
 		if not comment
 			return
 
+		# TODO: something weird's happening here that's duplicating comments sometimes
+		# everything's pretty okay once they get persisted, but it's a front-end problem
 		@pin.get('comments').push(comment)
 		@pin.save()
 		@pin.trigger('change')
