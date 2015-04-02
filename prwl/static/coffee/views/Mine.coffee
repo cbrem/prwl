@@ -1,7 +1,7 @@
 # TODO: highlight on hover on map...2-way
 # TODO: change so that it updates pins when they're edited not just added
 
-class prowl.views.Mine extends Backbone.View
+class prwl.views.Mine extends Backbone.View
 	events:
     	"click #pin-button": "dropPin"
 
@@ -19,7 +19,7 @@ class prowl.views.Mine extends Backbone.View
 		pinsDiv = @$el.find('#mine-pins-anchor')
 		pinsDiv.empty()
 		@collection.each((pin) =>
-			pinView = new prowl.views.Pin(pin)
+			pinView = new prwl.views.Pin(pin)
 			pinsDiv.append(pinView.render().$el);
 		)
 
@@ -35,7 +35,7 @@ class prowl.views.Mine extends Backbone.View
 		if navigator.geolocation?
 			# Set location to user's location
 			succ = (loc) =>
-				pin = new prowl.models.Pin(
+				pin = new prwl.models.Pin(
 					lat: loc.coords.latitude
 					lng: loc.coords.longitude
 					time: loc.timestamp
@@ -53,7 +53,7 @@ class prowl.views.Mine extends Backbone.View
 			# and also so we can use watchPostion instead
 			navigator.geolocation.getCurrentPosition(succ, fail)
 		else
-			alert('Please enable navigation to allow Prowl to work correctly!')
+			alert('Please enable navigation to allow prwl to work correctly!')
 			window.location.reload()
 
 

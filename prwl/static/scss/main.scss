@@ -1,41 +1,41 @@
-$prowl-blue: #2496D5;
-$prowl-purple: #A34188;
-$prowl-gray: #BBBBBB;
-$prowl-heading-fonts: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+$prwl-blue: #2496D5;
+$prwl-purple: #A34188;
+$prwl-gray: #BBBBBB;
+$prwl-heading-fonts: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
 
 $icon-bar-image-height: 1rem;
 
 h1 {
 	font-size: 80px;
-	font-family: $prowl-heading-fonts;
-	color: $prowl-blue;
+	font-family: $prwl-heading-fonts;
+	color: $prwl-blue;
 }
 
 h2 {
 	font-size: 50px;
-	font-family: $prowl-heading-fonts;
-	color: $prowl-blue;
+	font-family: $prwl-heading-fonts;
+	color: $prwl-blue;
 }
 
 h3 {
 	font-size: 30px;
-	font-family: $prowl-heading-fonts;
-	color: $prowl-blue;
+	font-family: $prwl-heading-fonts;
+	color: $prwl-blue;
 }
 
 p {
-	color: $prowl-gray;
+	color: $prwl-gray;
 }
 
 ul {
-	color: $prowl-gray;
+	color: $prwl-gray;
 	margin-left: 40px;
 }
 
 .pin, .inspected-pin {
 	margin: 10px;
 	padding: 10px;
-	background: $prowl-blue;
+	background: $prwl-blue;
 	color: white;
 	cursor: pointer;
 }
@@ -43,12 +43,12 @@ ul {
 .comment {
 	margin: 10px;
 	padding: 10px;
-	background: $prowl-blue;
+	background: $prwl-blue;
 	color: white;
 }
 
 .icon-bar {
-	background: $prowl-blue;
+	background: $prwl-blue;
 
 	a {
 		color: white;
@@ -57,16 +57,16 @@ ul {
 
 a {
 	:link {
-		color: $prowl-blue;
+		color: $prwl-blue;
 	}
 
 	:visited {
-		color: $prowl-purple;
+		color: $prwl-purple;
 	}
 }
 
 button {
-	background: $prowl-blue;
+	background: $prwl-blue;
 	border: solid 1px white;
 }
 

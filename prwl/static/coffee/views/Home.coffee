@@ -1,13 +1,13 @@
 fmtTime = (time) -> time
 
-class prowl.views.Home extends Backbone.View
+class prwl.views.Home extends Backbone.View
 	# TODO: can we use a router to do this instead?
 	events:
 		'click #mine-button': '_gotoMine'
 		'click #search-button': '_gotoSearch'
 
 	initialize: () ->
-		@collection = new prowl.collections.Pins()
+		@collection = new prwl.collections.Pins()
 		@collection.on('add remove change reset', @_updateMap, @)
 		@collection.fetch()
 
@@ -16,8 +16,8 @@ class prowl.views.Home extends Backbone.View
 
 		@_viewCache = {}
 
-		prowl.events.on('goto-inspect', @_gotoInspect, @)
-		prowl.events.on('goto-mine', @_gotoMine, @)
+		prwl.events.on('goto-inspect', @_gotoInspect, @)
+		prwl.events.on('goto-mine', @_gotoMine, @)
 
 		@
 
@@ -39,7 +39,7 @@ class prowl.views.Home extends Backbone.View
 		if _.has(@_viewCache, name) and cache
 			@view = @_viewCache[name]
 		else
-			@view = new (prowl.views[name])(args)
+			@view = new (prwl.views[name])(args)
 			@view.render()
 			@_viewCache[name] = @view
 		$el.append(@view.$el)
@@ -69,7 +69,7 @@ class prowl.views.Home extends Backbone.View
 		# Render map
 		opt = zoom: 11
 		mapDiv = @$el.find('#map-anchor')[0]
-		prowl.map = @map = new google.maps.Map(mapDiv, opt)
+		prwl.map = @map = new google.maps.Map(mapDiv, opt)
 		@_updateMap()
 
 		# Set location to user's location
@@ -80,7 +80,7 @@ class prowl.views.Home extends Backbone.View
 			fail = (e) -> console.log(e.message)
 			navigator.geolocation.getCurrentPosition(succ, fail)
 		else
-			alert('Please enable navigation to allow Prowl to work correctly!')
+			alert('Please enable navigation to allow prwl to work correctly!')
 			window.location.reload()
 
 		@

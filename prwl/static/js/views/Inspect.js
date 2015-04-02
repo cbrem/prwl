@@ -3,7 +3,7 @@
   var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     hasProp = {}.hasOwnProperty;
 
-  prowl.views.Inspect = (function(superClass) {
+  prwl.views.Inspect = (function(superClass) {
     extend(Inspect, superClass);
 
     function Inspect() {
@@ -39,8 +39,8 @@
         pin: this.pin
       }));
       pos = new google.maps.LatLng(this.pin.get('lat'), this.pin.get('lng'));
-      prowl.map.setCenter(pos);
-      prowl.map.setZoom(11);
+      prwl.map.setCenter(pos);
+      prwl.map.setZoom(11);
       return this;
     };
 
@@ -60,7 +60,7 @@
         });
       }
       this.pin.save();
-      return prowl.events.trigger('goto-mine');
+      return prwl.events.trigger('goto-mine');
     };
 
     Inspect.prototype.addComment = function() {

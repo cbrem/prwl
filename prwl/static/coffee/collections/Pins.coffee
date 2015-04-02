@@ -1,6 +1,6 @@
-class prowl.collections.Pins extends Backbone.Collection
+class prwl.collections.Pins extends Backbone.Collection
 	url: '/pins'
-	model: prowl.models.Pin
+	model: prwl.models.Pin
 
 
 	parse: (res, xhr) -> return res.pins

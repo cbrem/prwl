@@ -1,4 +1,4 @@
-class prowl.views.Search extends Backbone.View
+class prwl.views.Search extends Backbone.View
 	events:
 		'keyup #search-input': 'checkCodes'
 
@@ -20,7 +20,7 @@ class prowl.views.Search extends Backbone.View
 
 		anchor = $('#search-pins-anchor')
 		_.each(pinsWithTag, (pin) ->
-			pinView = new prowl.views.Pin(pin)
+			pinView = new prwl.views.Pin(pin)
 			anchor.append(pinView.render().$el);
 		)
 

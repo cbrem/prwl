@@ -1,4 +1,4 @@
-class prowl.views.Pin extends Backbone.View
+class prwl.views.Pin extends Backbone.View
 	events:
     	"click .pin": "inspectPin"
 
@@ -14,4 +14,4 @@ class prowl.views.Pin extends Backbone.View
 
 	inspectPin: () ->
 		time = @pin.get('time')
-		prowl.events.trigger('goto-inspect', @pin)
+		prwl.events.trigger('goto-inspect', @pin)

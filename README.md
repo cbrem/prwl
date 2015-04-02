@@ -1,4 +1,4 @@
-V2 of the Prowl app.
+V2 of the PRWL app.
 
 Frontend technologies:
 * Backbone.js
@@ -8,7 +8,7 @@ Frontend technologies:
 Backend technologies:
 * Flask
 
-To develop:
+To develop, from `prwl/static`:
 
 	# To compile all .scss file to .css
 	sass --watch scss:css

@@ -1,4 +1,4 @@
-class prowl.views.Store extends Backbone.View
+class prwl.views.Store extends Backbone.View
 	events: {}
 	initialize: () -> @
 	render: () ->

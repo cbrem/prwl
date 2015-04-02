@@ -1,5 +1,5 @@
 # TODO: need to bind to create comment
-class prowl.views.Inspect extends Backbone.View
+class prwl.views.Inspect extends Backbone.View
 	events:
 		"click #inspected-pin-submit": "submit"
 		"keydown #comment-text": "checkCodes"
@@ -24,8 +24,8 @@ class prowl.views.Inspect extends Backbone.View
 
 		# Zoom to pin
 		pos = new google.maps.LatLng(@pin.get('lat'), @pin.get('lng'))
-		prowl.map.setCenter(pos)
-		prowl.map.setZoom(11)
+		prwl.map.setCenter(pos)
+		prwl.map.setZoom(11)
 
 		@
 
@@ -38,7 +38,7 @@ class prowl.views.Inspect extends Backbone.View
 		if desc then @pin.set(desc: desc)
 		if tagStr then @pin.set(tags: @_parseTags(tagStr))
 		@pin.save()
-		prowl.events.trigger('goto-mine')
+		prwl.events.trigger('goto-mine')
 
 	addComment: () ->
 		# Validation

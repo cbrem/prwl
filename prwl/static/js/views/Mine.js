@@ -3,7 +3,7 @@
   var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     hasProp = {}.hasOwnProperty;
 
-  prowl.views.Mine = (function(superClass) {
+  prwl.views.Mine = (function(superClass) {
     extend(Mine, superClass);
 
     function Mine() {
@@ -35,7 +35,7 @@
       return this.collection.each((function(_this) {
         return function(pin) {
           var pinView;
-          pinView = new prowl.views.Pin(pin);
+          pinView = new prwl.views.Pin(pin);
           return pinsDiv.append(pinView.render().$el);
         };
       })(this));
@@ -54,7 +54,7 @@
         succ = (function(_this) {
           return function(loc) {
             var pin;
-            pin = new prowl.models.Pin({
+            pin = new prwl.models.Pin({
               lat: loc.coords.latitude,
               lng: loc.coords.longitude,
               time: loc.timestamp
@@ -70,7 +70,7 @@
         };
         return navigator.geolocation.getCurrentPosition(succ, fail);
       } else {
-        alert('Please enable navigation to allow Prowl to work correctly!');
+        alert('Please enable navigation to allow prwl to work correctly!');
         return window.location.reload();
       }
     };

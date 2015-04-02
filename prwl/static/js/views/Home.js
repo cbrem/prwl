@@ -8,7 +8,7 @@
     return time;
   };
 
-  prowl.views.Home = (function(superClass) {
+  prwl.views.Home = (function(superClass) {
     extend(Home, superClass);
 
     function Home() {
@@ -21,14 +21,14 @@
     };
 
     Home.prototype.initialize = function() {
-      this.collection = new prowl.collections.Pins();
+      this.collection = new prwl.collections.Pins();
       this.collection.on('add remove change reset', this._updateMap, this);
       this.collection.fetch();
       this.map = null;
       this.view = null;
       this._viewCache = {};
-      prowl.events.on('goto-inspect', this._gotoInspect, this);
-      prowl.events.on('goto-mine', this._gotoMine, this);
+      prwl.events.on('goto-inspect', this._gotoInspect, this);
+      prwl.events.on('goto-mine', this._gotoMine, this);
       return this;
     };
 
@@ -64,7 +64,7 @@
       if (_.has(this._viewCache, name) && cache) {
         this.view = this._viewCache[name];
       } else {
-        this.view = new prowl.views[name](args);
+        this.view = new prwl.views[name](args);
         this.view.render();
         this._viewCache[name] = this.view;
       }
@@ -100,7 +100,7 @@
         zoom: 11
       };
       mapDiv = this.$el.find('#map-anchor')[0];
-      prowl.map = this.map = new google.maps.Map(mapDiv, opt);
+      prwl.map = this.map = new google.maps.Map(mapDiv, opt);
       this._updateMap();
       if (navigator.geolocation != null) {
         succ = (function(_this) {
@@ -115,7 +115,7 @@
         };
         navigator.geolocation.getCurrentPosition(succ, fail);
       } else {
-        alert('Please enable navigation to allow Prowl to work correctly!');
+        alert('Please enable navigation to allow prwl to work correctly!');
         window.location.reload();
       }
       return this;

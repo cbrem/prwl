@@ -3,7 +3,7 @@
   var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     hasProp = {}.hasOwnProperty;
 
-  prowl.views.Pin = (function(superClass) {
+  prwl.views.Pin = (function(superClass) {
     extend(Pin, superClass);
 
     function Pin() {
@@ -30,7 +30,7 @@
     Pin.prototype.inspectPin = function() {
       var time;
       time = this.pin.get('time');
-      return prowl.events.trigger('goto-inspect', this.pin);
+      return prwl.events.trigger('goto-inspect', this.pin);
     };
 
     return Pin;

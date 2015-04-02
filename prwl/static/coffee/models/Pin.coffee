@@ -1,4 +1,4 @@
-class prowl.models.Pin extends Backbone.Model
+class prwl.models.Pin extends Backbone.Model
     urlRoot: "/pins"
     idAttribute: "_id"
     defaults: () ->

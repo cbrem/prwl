@@ -1,12 +1,12 @@
 # Make namespace. Also use it as a hub for events
-window.prowl =
+window.prwl =
 	views: {}
 	collections: {}
 	models: {}
 	events: _.extend({}, Backbone.Events)
 
 # TODO: issue with how we're using _.template?
-class prowl.Router extends Backbone.Router
+class prwl.Router extends Backbone.Router
 	# TODO: richer routes, so we can keep things in history (like which pins youre looking at)
 	routes:
 		"": "home"
@@ -23,7 +23,7 @@ class prowl.Router extends Backbone.Router
 		if _.has(@_viewCache, name) and cache
 			@view = @_viewCache[name]
 		else
-			@view = new (prowl.views[name])(args)
+			@view = new (prwl.views[name])(args)
 			@view.render()
 			@_viewCache[name] = @view
 		$el.append(@view.$el)
@@ -33,5 +33,5 @@ class prowl.Router extends Backbone.Router
 	store: () -> @_cachedRender('Store', $('#main-anchor'), {})
 
 jQuery ->
-	prowl.router = new prowl.Router()
+	prwl.router = new prwl.Router()
 	Backbone.history.start()
