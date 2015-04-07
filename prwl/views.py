@@ -1,4 +1,4 @@
-from flask import request, abort
+from flask import request, abort, redirect
 from util import json
 from models import Pin, User
 from prwl import app, lm
@@ -76,3 +76,8 @@ def login():
 def logout():
 	logout_user()
 	return json({})
+
+# Redirect base URL to index
+@app.route('/')
+def base():
+	return redirect('/index.html')
