@@ -1,4 +1,10 @@
-# TODO: need to bind to create comment
+"""
+TODO:
+* need to bind to create comment
+* case on whether this pin belongs to the user.
+	* if it does, show edit
+"""
+
 class prwl.views.Inspect extends Backbone.View
 	events:
 		"click #inspected-pin-submit": "submit"
@@ -22,6 +28,11 @@ class prwl.views.Inspect extends Backbone.View
 	render: () ->
 		@$el.html(@template(pin: @pin))
 
+		# Hide form if this is not for the right user.
+		# TODO: make sure this works!
+		if not prwl.user or @pin.get('_id') not in prwl.user.get('pins')
+			$('#inspect-pin-form').hide()
+
 		# Zoom to pin
 		pos = new google.maps.LatLng(@pin.get('lat'), @pin.get('lng'))
 		prwl.map.setCenter(pos)
@@ -38,6 +49,9 @@ class prwl.views.Inspect extends Backbone.View
 		if desc then @pin.set(desc: desc)
 		if tagStr then @pin.set(tags: @_parseTags(tagStr))
 		@pin.save()
+
+		# TODO: we should decide globally whether we want to user events
+		# like this or router.navigate for navigation
 		prwl.events.trigger('goto-mine')
 
 	addComment: () ->
@@ -46,8 +60,9 @@ class prwl.views.Inspect extends Backbone.View
 		if not comment
 			return
 
-		# TODO: something weird's happening here that's duplicating comments sometimes
-		# everything's pretty okay once they get persisted, but it's a front-end problem
+		# TODO: be careful about how we're pushing comments here.
+		# should each comment be its own object with a pin id?
+		# or a pin contain a list of comments?
 		@pin.get('comments').push(comment)
 		@pin.save()
 		@pin.trigger('change')

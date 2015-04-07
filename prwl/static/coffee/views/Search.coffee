@@ -12,6 +12,7 @@ class prwl.views.Search extends Backbone.View
 		else if e.which == BACKSPACE
 			@clear()
 
+	# TODO: refactor this to actually fetch conditionally
 	search: () ->
 		tag = $('#search-input').val().trim()
 		pinsWithTag = @collection.filter((pin) ->

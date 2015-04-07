@@ -7,7 +7,8 @@
     views: {},
     collections: {},
     models: {},
-    events: _.extend({}, Backbone.Events)
+    events: _.extend({}, Backbone.Events),
+    user: null
   };
 
   prwl.Router = (function(superClass) {
@@ -28,7 +29,15 @@
       return this.view = null;
     };
 
-    Router.prototype._cachedRender = function(name, $el, args, cache) {
+    Router.prototype._renderIfLoggedIn = function(name, $el, cache) {
+      if (prwl.user != null) {
+        return this._cachedRender(name, $el, cache);
+      } else {
+        return this._cachedRender('Login', $('#main-anchor'));
+      }
+    };
+
+    Router.prototype._cachedRender = function(name, $el, cache) {
       if (this.view != null) {
         this.view.$el.detach();
       }
@@ -43,15 +52,15 @@
     };
 
     Router.prototype.home = function() {
-      return this._cachedRender('Home', $('#main-anchor'), {});
+      return this._renderIfLoggedIn('Home', $('#main-anchor'));
     };
 
     Router.prototype.about = function() {
-      return this._cachedRender('About', $('#main-anchor'), {});
+      return this._renderIfLoggedIn('About', $('#main-anchor'));
     };
 
     Router.prototype.store = function() {
-      return this._cachedRender('Store', $('#main-anchor'), {});
+      return this._renderIfLoggedIn('Store', $('#main-anchor'));
     };
 
     return Router;

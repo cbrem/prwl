@@ -4,6 +4,7 @@ window.prwl =
 	collections: {}
 	models: {}
 	events: _.extend({}, Backbone.Events)
+	user: null
 
 # TODO: issue with how we're using _.template?
 class prwl.Router extends Backbone.Router
@@ -17,8 +18,16 @@ class prwl.Router extends Backbone.Router
 		@_viewCache = {}
 		@view = null
 
+	_renderIfLoggedIn: (name, $el, cache) ->
+		if prwl.user?
+			@_cachedRender(name, $el, cache)
+		else
+			@_cachedRender('Login', $('#main-anchor'))
+
+
+	# TODO: not actually using view cache because cache is always undefined?
 	# TODO: reuse this other places!
-	_cachedRender: (name, $el, args, cache) ->
+	_cachedRender: (name, $el, cache) ->
 		if @view? then @view.$el.detach()
 		if _.has(@_viewCache, name) and cache
 			@view = @_viewCache[name]
@@ -28,9 +37,9 @@ class prwl.Router extends Backbone.Router
 			@_viewCache[name] = @view
 		$el.append(@view.$el)
 
-	home: () -> @_cachedRender('Home', $('#main-anchor'), {})
-	about: () -> @_cachedRender('About', $('#main-anchor'), {})
-	store: () -> @_cachedRender('Store', $('#main-anchor'), {})
+	home: () -> @_renderIfLoggedIn('Home', $('#main-anchor'))
+	about: () -> @_renderIfLoggedIn('About', $('#main-anchor'))
+	store: () -> @_renderIfLoggedIn('Store', $('#main-anchor'))
 
 jQuery ->
 	prwl.router = new prwl.Router()

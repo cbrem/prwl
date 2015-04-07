@@ -1,0 +1,1 @@
+prwl.fmtTime = (time) -> time

@@ -1,5 +1,3 @@
-fmtTime = (time) -> time
-
 class prwl.views.Home extends Backbone.View
 	# TODO: can we use a router to do this instead?
 	events:
@@ -49,7 +47,7 @@ class prwl.views.Home extends Backbone.View
 		if @map?
 			@collection.each((pin) =>
 		    	position = new google.maps.LatLng(pin.get('lat'), pin.get('lng'))
-		    	title = '#{ fmtTime(pin.get("time")) }: #{ pin.get("desc") }'
+		    	title = '#{ prwl.fmtTime(pin.get("time")) }: #{ pin.get("desc") }'
 		    	marker = new google.maps.Marker(
 		    		position: position
 		    		map: @map

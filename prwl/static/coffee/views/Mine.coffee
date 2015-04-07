@@ -7,8 +7,12 @@ class prwl.views.Mine extends Backbone.View
 
 	template: _.template($('#mine-template').html())
 
-	initialize: ({collection}) ->
-		@collection = collection
+	initialize: () ->
+		# TODO: should this really be a collection?
+		@collection = new prwl.collection.pins(prwl.user.get('pins'))
+
+		# TODO: make sure this compiles down correctly
+		@collection.fetch(data: $.param(username: prwl.user.username))
 		@collection.on('add remove change reset', @_updatePins, @)
 
 	render: () ->
@@ -42,7 +46,11 @@ class prwl.views.Mine extends Backbone.View
 				)
 
 				# TODO: do some triggering magic here so that we can add a pin on the parent view
+				# TODO: depending on how we structure the db, we maybe don't need to push the pin id
+				# directly to the user here...it might be enougth to just re-fetch the user's pins!
+				# maybe in a success callback?
 				pin.save()
+				prwl.user.get('pins').push(pin.get('_id'))
 				@collection.add(pin)
 				loader.remove()
 			fail = (e) ->

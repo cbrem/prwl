@@ -70,25 +70,38 @@
 		</div>
 
 		<!-- Main templates -->
-		<script type="text/template" id="home-template">
-			<div class="small-4 columns">
-				<div class="icon-bar three-up">
-				  	<a class="item" id="mine-button">
-				  		<img src="img/general-ui/svg/profile29.svg" width="24px">
-						<label>Mine</label>
-				  	</a>
-				  	<a class="item" id="search-button">
-				  		<img src="img/general-ui/svg/globe32.svg" width="24px">
-				    	<label>Search</label>
-				  	</a>
-				  	<a class="item" id="inspect-button">
-				  		<img src="img/general-ui/svg/magnifier52.svg" width="24px">
-				    	<label>Inspect</label>
-				  	</a>
+		<script type="text/template" id="login-template">
+			<div id="login-box" class="row">
+				<div class="small-3 small-centered columns">
+					<h2>Login or Register</h2>
+					<form id="login-form">
+						<input id="login-username" type="text" placeholder="username" required>
+						<input id="login-password" type="password" placeholder="password" required>
+					</form>
 				</div>
-				<div id="sidebar-anchor"></div>
 			</div>
-			<div class="small-8 columns" id="map-anchor"></div>
+		</script>
+		<script type="text/template" id="home-template">
+			<div class="row">
+				<div class="small-4 columns">
+					<div class="icon-bar three-up">
+					  	<a class="item" id="mine-button">
+					  		<img src="img/general-ui/svg/profile29.svg" width="24px">
+							<label>Mine</label>
+					  	</a>
+					  	<a class="item" id="search-button">
+					  		<img src="img/general-ui/svg/globe32.svg" width="24px">
+					    	<label>Search</label>
+					  	</a>
+					  	<a class="item" id="inspect-button">
+					  		<img src="img/general-ui/svg/magnifier52.svg" width="24px">
+					    	<label>Inspect</label>
+					  	</a>
+					</div>
+					<div id="sidebar-anchor"></div>
+				</div>
+				<div class="small-8 columns" id="map-anchor"></div>
+			</div>
 		</script>
 		<script type="text/template" id="about-template">
 			<div id="about-container" class="row">
@@ -199,5 +212,6 @@
 		<script src="js/views/Pin.js"></script>
 		<script src="js/models/Pin.js"></script>
 		<script src="js/collections/Pins.js"></script>
+		<!-- TODO: more includes, or better way to include everything? -->
 	</body>
 </html>

@@ -1,6 +1,6 @@
-from flask import jsonify
 from flask.json import JSONEncoder, JSONDecoder
 from bson.objectid import ObjectId
+from flask import jsonify
 
 # Override default JSON encoder/decoder to work with BSON
 class BSONEncoder(JSONEncoder):
@@ -26,5 +26,4 @@ class BSONDecoder(JSONDecoder):
 		return o
 
 # Turns a dictionary into a json response.
-def jsonResponse(d):
-	return jsonify(**d)
+def json(d): return jsonify(**d)

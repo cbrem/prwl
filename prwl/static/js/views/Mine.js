@@ -16,10 +16,13 @@
 
     Mine.prototype.template = _.template($('#mine-template').html());
 
-    Mine.prototype.initialize = function(arg) {
-      var collection;
-      collection = arg.collection;
-      this.collection = collection;
+    Mine.prototype.initialize = function() {
+      this.collection = new prwl.collection.pins(prwl.user.get('pins'));
+      this.collection.fetch({
+        data: $.param({
+          username: prwl.user.username
+        })
+      });
       return this.collection.on('add remove change reset', this._updatePins, this);
     };
 
@@ -60,6 +63,7 @@
               time: loc.timestamp
             });
             pin.save();
+            prwl.user.get('pins').push(pin.get('_id'));
             _this.collection.add(pin);
             return loader.remove();
           };
