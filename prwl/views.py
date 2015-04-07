@@ -3,7 +3,7 @@ from util import json
 from models import Pin, User
 from prwl import app, lm
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import login_user, current_user, login_required
+from flask_login import login_user, current_user, login_required, logout_user
 
 # Create a new pin
 @app.route('/pins', methods=['POST'])
@@ -61,7 +61,7 @@ def get_user(username):
 
 # Try to log a user in
 @app.route('/users/login', methods=['POST'])
-def try_login():
+def login():
 	username = request.params.username
 	password = request.params.password
 	user = User.get({'username': username})
@@ -70,3 +70,9 @@ def try_login():
 		return json({})
 	else:
 		abort(403)
+
+# Try to log a user in
+@app.route('/users/logout', methods=['POST'])
+def logout():
+	logout_user()
+	return json({})

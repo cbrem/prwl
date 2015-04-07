@@ -13,4 +13,14 @@ class prwl.models.User extends Backbone.Model
             data:
                 username: @.get('username')
                 password: @.get('password')
+            success: success
+            failure: failure
         )
+
+    logout: ({success, failure}) ->
+        $.post(
+            url: '/users/logout'
+            success: success
+            failure: failure
+        )
+
